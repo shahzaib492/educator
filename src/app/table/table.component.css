@@ -1,0 +1,30 @@
+.p-button-blue{
+    background-color: #6365f2 !important;
+    border: 1px solid #6365f2 !important;
+
+}
+
+.p-button-green{
+    background-color: #21c55d;
+    border: 1px solid #21c55d !important;
+
+}
+
+
+.p-button-yellow{
+    background-color: #f69e17;
+    border: 1px solid #f69e17;
+}
+
+@media  print {
+    .dn{
+        display: none !important;
+    }
+ }
+
+ .dropdown-backdrop {
+    backdrop-filter: blur(5px) contrast(.1);
+}
+
+
+

@@ -1,0 +1,332 @@
+<p-calendar [(ngModel)]="date14"
+[numberOfMonths]="6"   inputId="multiplemonths" selectionMode="multiple" [inline]="true">
+<ng-template pTemplate="date" let-date  >
+  <span [ngStyle]="{
+    'backgroundColor':(((date.month>=2 && date.month<=3) && date.day ===22)) || ((date.month===4) && date.day ===5)  ? '#6365f2' : 'inherit',
+    'border':(((date.month>=2 && date.month<=3) && date.day ===22)) || ((date.month===4) && date.day ===5)  ?'1px solid black':'',
+    'color':(((date.month>=2 && date.month<=3) && date.day ===22)) || ((date.month===4) && date.day ===5)  ?'white':'',
+    'border-radius':(((date.month>=2 && date.month<=3) && date.day ===22)) || ((date.month===4) && date.day ===5)  ?'5px':'',
+    'padding':(((date.month>=2 && date.month<=3) && date.day ===22)) || ((date.month===4) && date.day ===5)  ?'50%':''  }" >{{date.day}}</span>
+    </ng-template>
+</p-calendar>
+
+
+
+
+
+<div class="grid p-3">
+  <div class="col">
+    <p class="text-2xl text-600 font-bold">Courses Usage Logs</p>
+    <p class="text-600 font-bold">Students enrolled in Geometry v15(3940)</p>
+  </div>
+</div>
+
+
+<div class="p-5">
+
+  <p-table #dt2 [value]="cars" id="print-section" styleClass="p-datatable-sm" responsiveLayout="scroll"
+    [globalFilterFields]="['name','date','Id','status']">
+    <ng-template pTemplate="caption">
+      <div class="grid     dn">
+        <div class="md:col-6 col-12 flex">
+          <button pButton type="button" label="Copy" class="p-button-blue" (click)="copy()"><span
+              class=' pi pi-copy'></span>&nbsp;</button>
+          <button type="button" pButton pRipple label="Download " (click)="exportExcel()" class="p-button-green ml-2"
+            pTooltip="XLS" tooltipPosition="bottom"></button>
+          <button class="ml-3 p-button-yellow text-white 
+      " pButton type="button" label="Print" [useExistingCss]="true" printSectionId="print-section" ngxPrint>
+            <span class="pi pi-print">&nbsp;</span>
+          </button>
+        </div>
+        <div class="md:col-6 col-12 md:text-right text-center">
+
+          <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="Search keyword" />
+          </span>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="font-bold">Name</th>
+        <th class="font-bold">Username</th>
+        <th class="font-bold">Last Sign In</th>
+        <th class="font-bold">Logins</th>
+        <th class="font-bold">Actions</th>
+        <th class="font-bold">Total Time Online</th>
+        <th class="font-bold">More Detail</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.name}}</td>
+        <td>{{product.name}}</td>
+        <td><span
+            [ngClass]="{'bg-pink-100 md:p-2 text-pink-500 text-xs font-semibold' : product.date1==''}">{{product.date1?product.date1:'NEVER SIGNED IN'}}</span>
+        </td>
+        <td>{{product.date}}</td>
+        <td>{{product.id}}</td>
+        <td>{{product.activity}}</td>
+        <td><button pButton type="button" label="Detail" class="p-button-blue" (click)="showDialog()"></button></td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
+
+<p-dialog [style]="{width: '50vw'}" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" header="Title"
+  [(visible)]="display">
+
+  <ng-template pTemplate="header">
+    <h4 class="font-bold ">
+      Tilda Moralle Action History
+
+    </h4>
+
+  </ng-template>
+  <p-tabView>
+    <p-tabPanel header="Action History" id="print-section">
+
+      <p-table #dt1 [value]="cars" styleClass="p-datatable-sm" responsiveLayout="scroll"
+        [globalFilterFields]="['date','date']">
+
+        <ng-template pTemplate="caption">
+          <div class="grid     dn">
+            <div class="md:col-6 col-12 flex">
+              <button pButton type="button" label="Copy" class="p-button-blue" (click)="copy()"><span
+                  class=' pi pi-copy'></span>&nbsp;</button>
+              <button type="button" pButton pRipple label="Download " (click)="exportExcel()"
+                class="p-button-green ml-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+              <button class="ml-3 p-button-yellow text-white 
+          " pButton type="button" label="Print" [useExistingCss]="true" printSectionId="print-section" ngxPrint>
+                <span class="pi pi-print">&nbsp;</span>
+              </button>
+            </div>
+            <div class="md:col-6 col-12 md:text-right text-center">
+
+              <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+                  placeholder="Search keyword" />
+              </span>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="font-bold" pSortableColumn="date">
+              <div class="flex justify-content-center align-items-center">
+                Time
+                <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
+                <p-sortIcon field="date"></p-sortIcon>
+              </div>
+            </th>
+            <th class="font-bold" pSortableColumn="date">
+              <div class="flex justify-content-center align-items-center">
+                Time spent
+                <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
+                <p-sortIcon field="date"></p-sortIcon>
+
+              </div>
+            </th>
+            <th class="font-bold" pSortableColumn="date">
+              <div class="flex justify-content-center align-items-center">
+                Action
+                <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
+                <p-sortIcon field="date"></p-sortIcon>
+
+              </div>
+            </th>
+            <th class="font-bold" pSortableColumn="date">
+              <div class="flex justify-content-center align-items-center">
+                Assingment
+                <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
+                <p-sortIcon field="date"></p-sortIcon>
+
+              </div>
+            </th>
+            <th class="font-bold" pSortableColumn="id">
+              <div class="flex justify-content-center align-items-center">
+                ObjectId
+                <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+                <p-sortIcon field="id"></p-sortIcon>
+
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{product.date}}</td>
+            <td>{{product.date}}</td>
+            <td>
+              <p-tag value="Post" severity="success"></p-tag>
+            </td>
+            <td>{{product.date}}</td>
+            <td>{{product.id}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+    </p-tabPanel>
+    <p-tabPanel header="Login History">
+      Login History
+
+      <!-- user login Hisotry -->
+      <p-table #dt3 [value]="cars" styleClass="p-datatable-sm" responsiveLayout="scroll"
+        [globalFilterFields]="['date','date']">
+
+        <ng-template pTemplate="caption">
+          <div class="grid     dn">
+            <div class="md:col-6 col-12 flex">
+              <button pButton type="button" label="Copy" class="p-button-blue" (click)="copy()"><span
+                  class=' pi pi-copy'></span>&nbsp;</button>
+              <button type="button" pButton pRipple label="Download " (click)="exportExcel()"
+                class="p-button-green ml-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+              <button class="ml-3 p-button-yellow text-white 
+        " pButton type="button" label="Print" [useExistingCss]="true" printSectionId="print-section" ngxPrint>
+                <span class="pi pi-print">&nbsp;</span>
+              </button>
+            </div>
+            <div class="md:col-6 col-12 md:text-right text-center">
+
+              <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt3.filterGlobal($any($event.target).value, 'contains')"
+                  placeholder="Search keyword" />
+              </span>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="font-bold" pSortableColumn="date">
+              <div class="flex justify-content-center align-items-center">
+                Signed In
+                <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
+                <p-sortIcon field="date"></p-sortIcon>
+              </div>
+            </th>
+            <th class="font-bold" pSortableColumn="date">
+              <div class="flex justify-content-center align-items-center">
+                Signed Out
+                <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
+                <p-sortIcon field="date"></p-sortIcon>
+
+              </div>
+            </th>
+
+            <th class="font-bold" pSortableColumn="date">
+              <div class="flex justify-content-center align-items-center">
+                IP Address
+                <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
+                <p-sortIcon field="date"></p-sortIcon>
+
+              </div>
+            </th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{product.date}}</td>
+            <td>{{product.date}}</td>
+
+            <td>{{product.id}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+
+    </p-tabPanel>
+    <p-tabPanel header="Useage by Date">
+ 
+      <div class="grid">
+        <div class="md:col-8 col-12 m-auto">
+          <p-calendar [(ngModel)]="date14"  [style]="{'width':'100%'}"  inputId="multiplemonths" selectionMode="multiple" [inline]="true">
+            <ng-template pTemplate="date" let-date>
+              <span [ngStyle]="{
+                'backgroundColor': (date.day < 21 && date.day > 10) ? '#6365f2' : 'inherit',
+                'border': (date.day < 21 && date.day > 10) ? '1px solid black' : 'inherit',
+                'color': (date.day < 21 && date.day > 10) ? 'white' : 'inherit',
+                'border-radius': (date.day < 21 && date.day > 10) ? '5px' : 'inherit',
+                'padding': (date.day < 21 && date.day > 10) ? '50%' : 'inherit'
+              
+              }">{{date.day}}</span>
+          </ng-template>
+          </p-calendar>
+        </div>
+      </div>
+
+
+
+    </p-tabPanel>
+    <p-tabPanel header="Usage by Hour" >
+      <h6>
+        Useage by Hour
+      </h6>
+
+    </p-tabPanel>
+  </p-tabView>
+</p-dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
